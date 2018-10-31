@@ -40,6 +40,7 @@ intents (8 in French) allowing to control a smart speaker through playback
  control (volume control, track navigation, etc), but also play music from
  large libraries of artists, tracks and albums. The assistants have a
  vocabulary size of more than 65k words in English and 70k words in French.
+ For this assistant, recordings are only available for the test set.
  The English ontology is the following:
     * `NextSong` (200 queries, no slot),
     * `PreviousSong` (199 queries, no slot),
