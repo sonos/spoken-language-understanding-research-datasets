@@ -95,7 +95,7 @@ Use only for academic and/or research purposes. No commercial use.
 Publication permitted only if the Data Sets are unmodified and subject to the same license terms.
 Any publication must include a full citation to the paper in which the Data Sets were initially published by Snips.
 
-Please read the full [https://github.com/snipsco/spoken-language-understanding-research-datasets/blob/master/LICENSE](License Terms) before accessing the Data Sets.
+Please read the full [License Terms](blob/master/LICENSE) before accessing the Data Sets.
 
 ## Data Set access
 
