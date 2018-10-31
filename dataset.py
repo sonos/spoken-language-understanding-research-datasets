@@ -3,24 +3,24 @@
 
 from __future__ import unicode_literals
 
+from future.utils import iteritems, itervalues
 import io
 import json
 import os
 from abc import ABCMeta, abstractproperty, abstractmethod
 from copy import deepcopy
-from pathlib import Path
 
 
 class Dataset(object):
     __metaclass__ = ABCMeta
     """
-        Abstract dataset class to inherit from when implementing a new
-        dataset handler
+        Abstract data set class to inherit from when implementing a new
+        data set handler
     """
 
     @classmethod
     @abstractmethod
-    def from_dir(cls, dir):
+    def from_dir(cls, _dir):
         """
             Instantiates a dataset from a folder
         """
@@ -37,12 +37,6 @@ class Dataset(object):
     @abstractmethod
     def get_audio_file(self, text):
         raise NotImplementedError
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, ex_type, value, traceback):
-        pass
 
 
 class TrainTestDataset(Dataset):
@@ -70,18 +64,17 @@ class TrainTestDataset(Dataset):
 
     @classmethod
     def from_dir(cls, _dir):
-        _dir = Path(_dir)
-        metadata_path = _dir / "metadata.json"
-        json_data = load_json(str(metadata_path))
+        metadata_path = os.path.join(_dir, "metadata.json")
+        json_data = load_json(metadata_path)
 
-        training_dataset_path = _dir / "training_dataset.json"
-        training_dataset = load_json(str(training_dataset_path))
+        training_dataset_path = os.path.join(_dir, "training_dataset.json")
+        training_dataset = load_json(training_dataset_path)
 
-        test_dataset_path = _dir / "test_dataset.json"
-        test_dataset = load_json(str(test_dataset_path))
+        test_dataset_path = os.path.join(_dir, "test_dataset.json")
+        test_dataset = load_json(test_dataset_path)
 
         for entry in json_data:
-            entry["path_file"] = str(_dir / entry["path_file"])
+            entry["path_file"] = os.path.join(_dir, entry["path_file"])
 
         return cls(json_data, training_dataset, test_dataset)
 
@@ -108,10 +101,10 @@ class CrossValDataset(Dataset):
         self.config = config
 
         self.audio_corpus = {}
-        for sentence, wav_file in audio_corpus.iteritems():
+        for sentence, wav_file in iteritems(audio_corpus):
             self.audio_corpus[sentence] = wav_file
 
-        # clean up the dataset by removing utterances that don't have an audio
+        # clean up the data set by removing utterances that don't have an audio
         self._dataset = keep_only_utterances_with_audio(
             dataset, self.audio_corpus
         )
@@ -126,7 +119,7 @@ class CrossValDataset(Dataset):
         audio_corpus = {
             item['text']: os.path.abspath(
                 os.path.join(speech_corpus_dir, 'audio', item['filename'])) for
-            item in metadata.itervalues()
+            item in itervalues(metadata)
         }
         return cls(config, dataset, audio_corpus)
 
@@ -159,7 +152,7 @@ def keep_only_utterances_with_audio(dataset, audio_corpus):
     cleaned_up_dataset = deepcopy(dataset)
     n_skipped = 0
     total = 0
-    for intent, intent_data in dataset['intents'].iteritems():
+    for intent, intent_data in iteritems(dataset['intents']):
         cleaned_up_dataset['intents'][intent]['utterances'] = []
         for idx, utt in enumerate(intent_data['utterances']):
             total += 1
@@ -177,11 +170,3 @@ def keep_only_utterances_with_audio(dataset, audio_corpus):
     )
 
     return cleaned_up_dataset
-
-
-if __name__ == '__main__':
-    data_dir = "/path/to/smart-lights/data/folder"
-    dataset = TrainTestDataset.from_dir(data_dir)
-    print dataset.get_audio_file(
-        "Set lights to twenty two percent in the basement"
-    )

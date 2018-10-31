@@ -3,11 +3,7 @@
 ## Overview
 
 This repository contains the license and instructions relative to the open
-Data Sets mentioned in this publication:
-
-```
-LINK TO PAPER
-```
+Data Sets mentioned in this [publication](http://arxiv.org/abs/1810.12735).
 
 These Data Sets are made publicly available in the interest of
 reproducibility and in the hope that they can prove useful to the SLU community.
@@ -20,8 +16,10 @@ Far-field datasets are created by playing these utterances with a neutral
 speaker and recording them using a microphone array positioned at a distance
 of 2 meters.
 
-WARNING: For various reasons, some text queries might not have recordings.
-Handlers are provided in `dataset.py` to deal with this special case.
+**WARNING**: For various reasons, some text queries might not have recordings.
+Handlers are provided in `dataset.py` to deal with this special case (see below).
+
+## Description of the Data Sets
 
 The Data Sets cover two domains of increasing complexity:
 
@@ -71,6 +69,24 @@ intents (8 in French) allowing to control a smart speaker through playback
      list of the most streamed artists on Spotify, updated based on daily and
      weekly statistics (from https://kworb.net/spotify/artists.html, visited on 9/10/18). The list, divided in 3 tiers of
      popularity, will be available with the Data Sets.
+
+## Handlers
+
+Minimal handlers are provided for convenience in `dataset.py`. They depend on `future` for Python 2/3 compatibility.
+Here is an example of how to use them
+
+```python
+from dataset import TrainTestDataset, CrossValDataset
+
+data_dir = "/path/to/smart-lights/data/folder"
+dataset = TrainTestDataset.from_dir(data_dir)
+print(dataset.get_audio_file(
+    "Set lights to twenty two percent in the basement"))
+
+data_dir = "/path/to/smart-speaker/data/folder"
+dataset = CrossValDataset.from_dir(data_dir)
+print(dataset.get_audio_file("I'd like to listen to Drake")
+```
 
 ## License summary
 
