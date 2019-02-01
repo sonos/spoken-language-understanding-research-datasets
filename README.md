@@ -73,7 +73,7 @@ intents (8 in French) allowing to control a smart speaker through playback
 
 ## Handlers
 
-Minimal handlers are provided for convenience in `dataset.py`. They depend on `future` for Python 2/3 compatibility.
+Minimal handlers are provided for convenience in `dataset_handler.py`. They depend on `future` for Python 2/3 compatibility.
 Here is an example of how to use them
 
 ```python
