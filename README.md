@@ -3,13 +3,13 @@
 ## Overview
 
 This repository contains the license and instructions relative to the open
-Data Sets mentioned in this [publication](http://arxiv.org/abs/1810.12735):
+datasets mentioned in this [publication](http://arxiv.org/abs/1810.12735):
 
 ```
 Saade et al., 2018, "Spoken Language Understanding on the Edge"
 ```
 
-These Data Sets are made publicly available in the interest of
+These datasets are made publicly available in the interest of
 reproducibility and in the hope that they can prove useful to the SLU community.
 
 More specifically, they contain up to a few thousand text queries with their
@@ -25,7 +25,7 @@ Handlers are provided in `dataset.py` to deal with this special case (see below)
 
 ## Description of the Data Sets
 
-The Data Sets cover two domains of increasing complexity:
+The datasets cover two domains of increasing complexity:
 
 - a `SmartLights` assistant meant to be used in *cross validation*,
 comprising 6
@@ -69,11 +69,7 @@ intents (8 in French) allowing to control a smart speaker through playback
     * `PlayMusic` (548 queries in train, 1500 queries in test, slots:
     `song_name`, `artist_name`, `album_name`, `playlist_mode`, `playlist_name`)
 
-  The English and French test sets consist in 1,500 queries of the form ``play
-    some music by #ARTIST'', where we sample `#ARTIST` from a publicly available
-     list of the most streamed artists on Spotify, updated based on daily and
-     weekly statistics (from https://kworb.net/spotify/artists.html, visited on 9/10/18). The list, divided in 3 tiers of
-     popularity, will be available with the Data Sets.
+  The English and French test sets consist in 1,500 queries of the form ``play some music by #ARTIST'', where we sample `#ARTIST` from a publicly available list of the most streamed artists on Spotify, updated based on daily and weekly statistics (from https://kworb.net/spotify/artists.html, visited on 9/10/18). The list, divided in 3 tiers of popularity, will be available with the Data Sets.
 
 ## Handlers
 
@@ -96,14 +92,14 @@ print(dataset.get_audio_file("I'd like to listen to Drake")
 ## License summary
 
 Use only for academic and/or research purposes. No commercial use.
-Publication permitted only if the Data Sets are unmodified and subject to the same license terms.
-Any publication must include a full citation to the paper in which the Data Sets were initially published by Snips:
+Re-publication permitted only if the datasets are unmodified and subject to the same license terms.
+Any publication must include a full citation to the paper in which the datasets were initially published by Snips:
 
 ```
 Saade et al., 2018, "Spoken Language Understanding on the Edge"
 ```
 
-Please read the full [License Terms](https://github.com/snipsco/spoken-language-understanding-research-datasets/blob/master/LICENSE) before accessing the Data Sets.
+Please read the full [License Terms](https://github.com/snipsco/spoken-language-understanding-research-datasets/blob/master/LICENSE) before accessing the datasets.
 
 ## Data Set access
 
