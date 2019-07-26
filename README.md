@@ -3,7 +3,11 @@
 ## Overview
 
 This repository contains the license and instructions relative to the open
-Data Sets mentioned in this [publication](http://arxiv.org/abs/1810.12735).
+Data Sets mentioned in this [publication](http://arxiv.org/abs/1810.12735):
+
+```
+Saade et al., 2018, "Spoken Language Understanding on the Edge"
+```
 
 These Data Sets are made publicly available in the interest of
 reproducibility and in the hope that they can prove useful to the SLU community.
@@ -93,7 +97,11 @@ print(dataset.get_audio_file("I'd like to listen to Drake")
 
 Use only for academic and/or research purposes. No commercial use.
 Publication permitted only if the Data Sets are unmodified and subject to the same license terms.
-Any publication must include a full citation to the paper in which the Data Sets were initially published by Snips.
+Any publication must include a full citation to the paper in which the Data Sets were initially published by Snips:
+
+```
+Saade et al., 2018, "Spoken Language Understanding on the Edge"
+```
 
 Please read the full [License Terms](https://github.com/snipsco/spoken-language-understanding-research-datasets/blob/master/LICENSE) before accessing the Data Sets.
 
