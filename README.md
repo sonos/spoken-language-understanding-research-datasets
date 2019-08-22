@@ -103,10 +103,8 @@ Please read the full [License Terms](https://github.com/snipsco/spoken-language-
 
 ## Data Set access
 
-To access the data, please write an email mentioning your affiliation to
+To access the data, please fill the following form:
 
-```
-research-datasets@snips.ai
-```
+[https://forms.gle/JtmFYM7xK1SaMfZYA](https://forms.gle/JtmFYM7xK1SaMfZYA)
 
 You will be granted access shortly.
