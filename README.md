@@ -77,7 +77,7 @@ Minimal handlers are provided for convenience in `dataset_handler.py`. They depe
 Here is an example of how to use them
 
 ```python
-from dataset import TrainTestDataset, CrossValDataset
+from dataset_handler import TrainTestDataset, CrossValDataset
 
 data_dir = "/path/to/smart-lights/data/folder"
 dataset = CrossValDataset.from_dir(data_dir)
