@@ -3,13 +3,13 @@
 
 from __future__ import unicode_literals
 
-from future.utils import iteritems, itervalues
 import io
 import json
 import os
 from abc import ABCMeta, abstractproperty, abstractmethod
 from copy import deepcopy
-
+from future.utils import iteritems, itervalues
+from pathlib import Path
 
 class Dataset(object):
     __metaclass__ = ABCMeta
@@ -51,6 +51,7 @@ class TrainTestDataset(Dataset):
         self._normalized_test_dataset = None
         self.language = self._training_dataset["language"]
 
+        # text -> wav mapping
         self.audio_corpus = {}
         for entry in self.data:
             text = entry['text']
@@ -61,6 +62,11 @@ class TrainTestDataset(Dataset):
         self._test_dataset = keep_only_utterances_with_audio(
             self._test_dataset, self.audio_corpus
         )
+
+        # wav -> text mapping
+        self.wav_to_text = {
+            Path(wav).name: text for text, wav in self.audio_corpus.items()
+        }
 
     @classmethod
     def from_dir(cls, _dir):
@@ -84,6 +90,12 @@ class TrainTestDataset(Dataset):
             raise KeyError("Text {} is absent from audio dataset".format(text))
         return wav
 
+    def get_transcript(self, wav):
+        text = self.wav_to_text.get(wav)
+        if text is None:
+            raise KeyError("File {} does not exist".format(wav))
+        return text
+
     @property
     def training_dataset(self):
         return self._training_dataset
@@ -100,6 +112,7 @@ class CrossValDataset(Dataset):
     def __init__(self, config, dataset, audio_corpus):
         self.config = config
 
+        # text -> wav mapping
         self.audio_corpus = {}
         for sentence, wav_file in iteritems(audio_corpus):
             self.audio_corpus[sentence] = wav_file
@@ -108,6 +121,11 @@ class CrossValDataset(Dataset):
         self._dataset = keep_only_utterances_with_audio(
             dataset, self.audio_corpus
         )
+
+        # wav -> text mapping
+        self.wav_to_text = {
+            Path(wav).name: text for text, wav in self.audio_corpus.items()
+        }
 
     @classmethod
     def from_dir(cls, _dir):
@@ -128,6 +146,12 @@ class CrossValDataset(Dataset):
         if wav is None:
             raise KeyError("Text {} is absent from audio dataset".format(text))
         return wav
+
+    def get_transcript(self, wav):
+        text = self.wav_to_text.get(wav)
+        if text is None:
+            raise KeyError("File {} does not exist".format(wav))
+        return text
 
     @property
     def training_dataset(self):
