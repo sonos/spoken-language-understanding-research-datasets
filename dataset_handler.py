@@ -68,6 +68,9 @@ class TrainTestDataset(Dataset):
             Path(wav).name: text for text, wav in self.audio_corpus.items()
         }
 
+        # labels
+        self.utterances_labels = retrieve_utterances_labels(self._test_dataset)
+
     @classmethod
     def from_dir(cls, _dir):
         metadata_path = os.path.join(_dir, "metadata.json")
@@ -89,6 +92,18 @@ class TrainTestDataset(Dataset):
         if wav is None:
             raise KeyError("Text {} is absent from audio dataset".format(text))
         return wav
+
+    def get_labels_from_text(self, text):
+        labels = self.utterances_labels.get(text)
+        if labels is None:
+            raise KeyError("Text {} is absent from audio dataset".format(text))
+        return labels
+
+    def get_labels_from_wav(self, wav):
+        text = self.wav_to_text.get(wav)
+        if text is None:
+            raise KeyError("File {} does not exist".format(wav))
+        return self.utterances_labels.get(text)
 
     def get_transcript(self, wav):
         text = self.wav_to_text.get(wav)
@@ -127,6 +142,9 @@ class CrossValDataset(Dataset):
             Path(wav).name: text for text, wav in self.audio_corpus.items()
         }
 
+        # labels
+        self.utterances_labels = retrieve_utterances_labels(self._dataset)
+
     @classmethod
     def from_dir(cls, _dir):
         config = load_json(os.path.join(_dir, "config.json"))
@@ -153,6 +171,18 @@ class CrossValDataset(Dataset):
             raise KeyError("File {} does not exist".format(wav))
         return text
 
+    def get_labels_from_text(self, text):
+        labels = self.utterances_labels.get(text)
+        if labels is None:
+            raise KeyError("Text {} is absent from audio dataset".format(text))
+        return labels
+
+    def get_labels_from_wav(self, wav):
+        text = self.wav_to_text.get(wav)
+        if text is None:
+            raise KeyError("File {} does not exist".format(wav))
+        return self.utterances_labels.get(text)
+
     @property
     def training_dataset(self):
         return self._dataset
@@ -170,6 +200,20 @@ def load_json(filename, encoding='utf-8'):
     """
     with io.open(filename, 'r', encoding=encoding) as _file:
         return json.load(_file)
+
+
+def retrieve_utterances_labels(dataset):
+    utterances_labels = {}
+    for intent, intent_data in iteritems(dataset['intents']):
+        for idx, utt in enumerate(intent_data['utterances']):
+            sentence = "".join(chunk['text'] for chunk in utt['data'])
+            slots = [chunk for chunk in utt['data'] if 'entity' in chunk]
+            utterances_labels[sentence] = {
+                "text": sentence,
+                "intent": intent,
+                "slots": slots
+            }
+    return utterances_labels
 
 
 def keep_only_utterances_with_audio(dataset, audio_corpus):
