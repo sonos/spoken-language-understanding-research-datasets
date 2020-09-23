@@ -6,8 +6,10 @@ This repository contains the license and instructions relative to the open
 datasets mentioned in this [publication](http://arxiv.org/abs/1810.12735):
 
 ```
-Saade et al., 2018, "Spoken Language Understanding on the Edge"
+Saade A. et al., 2019, "Spoken Language Understanding on the Edge",
 ```
+
+accepted for publication at the [5th Workshop on Energy Efficient Machine Learning and Cognitive Computing](https://www.emc2-ai.org/neurips-19) colocated with NeurIPS 2019.
 
 These datasets are made publicly available in the interest of
 reproducibility and in the hope that they can prove useful to the SLU community.
@@ -105,13 +107,13 @@ print(dataset.get_labels_from_wav("0.wav"))
 
 Use only for academic and/or research purposes. No commercial use.
 Re-publication permitted only if the datasets are unmodified and subject to the same license terms.
-Any publication must include a full citation to the paper in which the datasets were initially published by Snips:
+Any publication must include a full citation to the paper in which the datasets were initially published by Snips<sup>1</sup>:
 
 ```
 Saade et al., 2018, "Spoken Language Understanding on the Edge"
 ```
 
-Please read the full [License Terms](https://github.com/snipsco/spoken-language-understanding-research-datasets/blob/master/LICENSE) before accessing the datasets.
+Please read the full [License Terms](https://github.com/sonos/spoken-language-understanding-research-datasets/blob/master/LICENSE) before accessing the datasets.
 
 ## Data Set access
 
@@ -120,3 +122,6 @@ To access the data, please fill the following form:
 [https://forms.gle/JtmFYM7xK1SaMfZYA](https://forms.gle/JtmFYM7xK1SaMfZYA)
 
 You will be granted access shortly.
+
+
+<sup>1</sup> *The Snips team has joined Sonos in November 2019. These open datasets remain available and their access is now managed by the Sonos Voice Experience Team. Please email sve-research@sonos.com with any question.*
