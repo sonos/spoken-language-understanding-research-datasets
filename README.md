@@ -110,8 +110,9 @@ Re-publication permitted only if the datasets are unmodified and subject to the 
 Any publication must include a full citation to the paper in which the datasets were initially published by Snips<sup>1</sup>:
 
 ```
-Saade et al., 2018, "Spoken Language Understanding on the Edge"
+Saade A. et al., 2019, "Spoken Language Understanding on the Edge",
 ```
+accepted for publication at the [5th Workshop on Energy Efficient Machine Learning and Cognitive Computing](https://www.emc2-ai.org/neurips-19) colocated with NeurIPS 2019.
 
 Please read the full [License Terms](https://github.com/sonos/spoken-language-understanding-research-datasets/blob/master/LICENSE) before accessing the datasets.
 
